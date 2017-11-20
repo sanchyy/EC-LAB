@@ -54,7 +54,6 @@ end:	sra $a0,$a0,8
 endlse:	sw $t3,0($a2)
 	sw $a1,0($a3)
 	
-	
 compon:
 	sll $t1,$a0,31
 	sll $t2,$a1,23
