@@ -1,0 +1,37 @@
+Cognoms, Nom:
+
+
+a) ¿Quantes fallades es produeixen en cada iteració del bucle extern?
+
+   iteració  num_fallades
+   --------  ------------
+	i=0  
+	i=1  
+	i=2  
+	i=3  
+	i=4  
+	i=5  
+	i=6  
+	i=7  
+
+b) ¿Quina és la causa de les fallades en les iteracions i=3 i i=7?
+
+
+
+
+
+
+c) ¿Quin és el mínim nombre de fallades que es poden aconseguir variant el grau d'associativitat?
+	Nombre de fallades = 
+	Grau d'associativitat = 
+	Justificació:
+
+
+
+d) ¿Quin és el mínim nombre de fallades que es poden aconseguir variant el grau d'associativitat i la mida del bloc?
+	Nombre de fallades = 
+	Grau d'associativitat = 
+	Mida del bloc (en bytes) = 
+	Justificació: 
+
+
