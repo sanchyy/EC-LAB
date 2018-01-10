@@ -16,7 +16,7 @@ main:
 	addiu $sp,$sp,-4	#obrim pila
 	sw $ra,0($sp)		#no reg.segurs -> guardem $ra nomes
 
-	la $a0, mat			#guardem @ a mat
+	la $a0, mat		#guardem @ a mat
 	jal suma_col		#anem a la rutina
 
 	lw $ra,0($sp)		#carreguem $ra un altre cop
@@ -31,7 +31,7 @@ main:
 suma_col:
 	
 	move $t0, $zero		#i = 0
- 	li $t3, 4 			#comparacio amb 4
+ 	li $t3, 4 		#comparacio amb 4
 	move $v0, $zero 	#suma = 0	
 	addiu $t1,$a0,8 	#punter a m[0][2]
 
