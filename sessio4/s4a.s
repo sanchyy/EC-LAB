@@ -35,28 +35,33 @@ main:
 
 
 descompon:
-	lw $t1,0($a1)
-	slti $a0, $a0, 0
-	sw $t1,0($a1)
-	sll $a0,$a0,1
-	bne $a1,$zero,else
-if:	move $t3,$zero #exp
-	b endlse
-else:	li $t3,18 #exp
-while:	bltu $a0,$zero,	end
-	sll $a0,$a0,1
-	addiu $t3,$t3,-1
-	b while
-end:	sra $a0,$a0,8
-	li $t4,0x7FFFFF
-	and $a0,$a0,$t4
-	addiu $t3,$t3,127
-endlse:	sw $t3,0($a2)
-	sw $a1,0($a3)
+	li 	$t0, 18			# exp = 18
+	slt 	$t1, $a0, $zero		# t1 = cf < 0
+	sw 	$t1, 0($a1)		# t1 -> signe
+	sll 	$a0, $a0, 1
 	
+	bne	$a0, $zero, cond	# cf != 0
+if:	li	$t0, 0			# exp = 0
+	b 	fiif
+	
+while:	sll 	$a0, $a0, 1		# cf = cf << 1
+	addiu	$t0, $t0, -1		# exp--
+
+cond:	bge 	$a0, $zero, while	# cf >= 0
+
+	srl	$a0, $a0, 8		# cf = cf >> 8
+	li	$t2, 0x7FFFFF
+	and	$a0, $a0, $t2		# cf = cf & 0x7FFFFF
+	addiu	$t0, $t0, 127
+
+fiif:	sw	$t0, 0($a2)
+	sw 	$a0, 0($a3)
+	jr	$ra
+
 compon:
-	sll $t1,$a0,31
-	sll $t2,$a1,23
-	or $t1,$t1,$t2
-	or $t1,$t1,$a2
-	move $v0, $t1
+	sll	$v0, $a0, 31
+	sll	$a1, $a1, 23
+	or	$v0, $v0, $a1
+	or	$v0, $v0, $a2
+	mtc1	$v0, $f0
+	jr	$ra
