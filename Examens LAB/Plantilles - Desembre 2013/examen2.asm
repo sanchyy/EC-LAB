@@ -39,5 +39,60 @@ nofares:
 	jr	$ra
 	
 func:
+	addiu $sp,$sp,-20
+	sw $s0,0($sp)		#&A
+	sw $s1,4($sp)		#n
+	sw $s2,8($sp)		#i
+	sw $s3,12($sp)		#*p
+	sw $ra,16($sp)		#$ra
+
+	move $s0,$a0
+	move $s1,$a2
+	move $s2,$zero		#i = 0
+	addi $s3,$a1,+28	#B[0][7]
+
+for:
+
+	bge $s2,$s1,fi_for
+
+	lw $t1,0($s0)
+	ble $t1,$zero,fi_if
+	move $a0,$s3
+	move $a1,$s0
+
+	jal posar
+
+fi_if:
+
+	addi $s3,$s3,32
+	addi $s0,$s0,4
+	addi $s2,$s2,1
+	j for
+
+fi_for:
+
+	lw $v0, -32($s3)
+
+	lw $s0,0($sp)
+	lw $s1,4($sp)
+	lw $s2,8($sp)
+	lw $s3,12($sp)
+	lw $ra,16($sp)
+	addiu $sp,$sp,20
+
+	jr $ra
 
 posar:
+	
+	lw $t7, 0($a1)
+	sw $t7,0($a0)
+
+	addiu $sp,$sp,-4
+	sw $ra,,0($sp)
+	jal nofares 
+
+	lw $ra,0($sp)
+	addiu $sp,$sp,4
+
+	jr $ra
+
